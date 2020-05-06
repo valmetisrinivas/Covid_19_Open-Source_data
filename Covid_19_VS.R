@@ -321,20 +321,3 @@ percents %>%
   ),
   legend.position = "top") +
   labs(subtitle="% of dead, recoveries and dead to recoveries")
-
-df_train <- cum_cases_all %>% filter(type=='confirmed') %>% 
-  mutate(day = as.integer(date-as.Date('2020-01-22'))) %>%
-  select (day, number=tot_cum_cases)
-
-df_test <- tibble(day = 200)
-
-control <- trainControl(method = "cv", number = 5, p =.9)
-grid_knn <- data.frame(k = seq(1,21,2))
-
-
-fit_knn <- train(number ~ day, method='knn', tuneGrid=grid_knn, trControl=control, data = df_train)
-predict(fit_knn, df_test)
-
-fit_rf <- train(number ~ day, method='rf',  trControl=control, data = df_train)
-predict(fit_rf, df_test)
-
