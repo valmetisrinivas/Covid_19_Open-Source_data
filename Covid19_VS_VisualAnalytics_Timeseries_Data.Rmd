@@ -22,10 +22,9 @@ library(scales)
 
 ```{r }
 # Read datasets/confirmed_cases_worldwide.csv into confirmed_cases_worldwide
-covid_ds <- data.table::fread('https://raw.githubusercontent.com/RamiKrispin/coronavirus-csv/master/coronavirus_dataset.csv', drop='Province.State') %>% 
-  mutate (date=as.Date(date)) %>% 
-  rename(country=Country.Region) %>%
-  select(-Lat, -Long)
+covid_ds <- data.table::fread('https://raw.githubusercontent.com/RamiKrispin/coronavirus/master/csv/coronavirus.csv', drop='province') %>%
+  mutate (date=as.Date(date)) %>%
+  select(-lat, -long)
 ```
 
 ```{r }
@@ -149,7 +148,7 @@ top_20_countries <- covid_ds %>% group_by(country) %>% summarize(total_cases=sum
 select_countries <- top_20_countries$country
 ```
 
-```{r }
+```{r, fig.height=10 }
 countries_cases %>%
   filter(country %in% select_countries) %>%
   ggplot(aes(country, cum_cases, fill=type)) +
