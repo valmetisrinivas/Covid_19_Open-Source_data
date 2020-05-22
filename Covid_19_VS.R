@@ -300,24 +300,24 @@ percents %>%
   filter(country %in% select_countries) %>%
   ggplot(aes(country, percentage, fill=country)) +
   geom_col()+
-  facet_grid(~type)+
+  facet_grid(type ~.)+
   theme(axis.text.x = element_text(
     angle = 90,
     size = 8,
     hjust = 1
   ),
-  legend.position = "top") +
+  legend.position = "none") +
   labs(subtitle="% of dead, recoveries and dead to recoveries")
 
 percents %>%
   filter(country %in% select_countries & country != 'United Kingdom' & country != 'Netherlands') %>%
   ggplot(aes(country, percentage, fill=country)) +
   geom_col()+
-  facet_grid(~type)+
+  facet_grid(type ~.)+
   theme(axis.text.x = element_text(
     angle = 90,
     size = 8,
     hjust = 1
   ),
-  legend.position = "top") +
+  legend.position = "none") +
   labs(subtitle="% of dead, recoveries and dead to recoveries")
