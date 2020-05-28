@@ -199,6 +199,7 @@ non_china_usa_cases %>%
     hjust = 1
   ),
   legend.position = "top") +
+  scale_y_continuous(label=comma) +
   labs(subtitle="Non_china, Non_USA cumulative number progression") 
 
 # Cases in india
